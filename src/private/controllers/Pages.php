@@ -12,6 +12,7 @@ class Pages extends Controller
 
     public function index()
     {
+        
         $users = $this->model('Posts')::find('all');
         $data =[
             'users' => $users
@@ -44,7 +45,8 @@ class Pages extends Controller
                     $_SESSION['log'] = array();
                     $user_detail = array(
                         'username'=> $data->username,
-                        'id'=> $data->user_id
+                        'id'=> $data->user_id,
+                        'user_is'=>$data->user_is
                     );
                     $_SESSION['log'] = $user_detail;
                     // array_push($_SESSION['log'],$data->username);
@@ -180,12 +182,49 @@ class Pages extends Controller
     }
     public function edit(){
         $postdata = $_POST ?? array();
+        // echo "<pre>";
+        // print_r($postdata);
+        // echo "</pre>";
 
         if(isset($_POST['edit'])){
             $val = $_POST['edit'];
+            $val2 = $_POST['idd'];
+            $data = $this->model('Posts')::find_by_post_id($val2);
+
+            // echo $val2;
             // echo $val;
             $this->view('pages/edit',$data);
+        }
+        if(isset($_POST['delete'])){
+            // echo "delete";
+            // $val = $_POST['edit'];
+            $val2 = $_POST['idd'];
+            $data = $this->model('Posts')::find_by_post_id($val2);
+            $data->delete();
+            $this->view('pages/edit',$data);
+
 
         }
+        // $data = $this->model('Posts')::find_by_post_id($postdata['idd']);
+        // $data->title = $postdata['title'];
+        // $data->content = $postdata['content'];
+ 
+    }
+    public function update(){
+        $postdata = $_POST ?? array();
+        // echo "<pre>";
+        // print_r($postdata);
+        // echo "</pre>";
+        // if($_POST['submit']){
+        $title = $_POST['title'];
+        $content = $_POST['Content'];
+        $id = $_POST['idd'];
+        $data =$this->model('Posts')::find_by_post_id($id);
+        $data->title = $title;
+        $data->content = $content;
+        $data->save();
+        $this->view('pages/edit',$data);
+
+        // }
     }
 }

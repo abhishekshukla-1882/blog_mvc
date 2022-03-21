@@ -6,6 +6,11 @@ if(!isset($_SESSION['log'])){
     $this->view('pages/login/footer');
     die();
 }
+// echo  "<pre>";
+// print_r($data);
+// echo "</pre>";
+// foreach($data as $val){
+//    echo $data->title;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,18 +23,20 @@ if(!isset($_SESSION['log'])){
 </head>
 <body>
     <div class="container">
-        <form action="" method="POST">
+        <form action="update" method="POST">
         <h3 class="ml-5">Post Page ! .</h3>
         <label>Title</label>
         <br>
 
-        <input type="text" placeholder="Title" name="title" id="title">
+        <input type="text"  value="<?php echo $data->title; ?>" name="title" id="title">
         <br>
+        <input type="hidden" name="idd" value = "<?php echo $data->post_id; ?>">
         <label>Content</label>
         <br>
 
-        <input type="text" placeholder="Content" name="Content" id="Content">
+        <input type="text" placeholder="Content" value="<?php echo $data->content; ?>" name="Content" id="Content">
         <button type="submit"> Post</button>
+   
 </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

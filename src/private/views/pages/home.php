@@ -1,3 +1,18 @@
+<?php
+if(isset($_SESSION['log'])){
+// echo "<pre>";
+// print_r($_SESSION['log']);
+// echo "</pre>";
+// if($_SESSION['log']['user_is']== '1'){
+//     echo "<a href''>Dashboard</a>";
+// }
+}
+else{
+    echo "Please Login To get a better expirences ..!";
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,8 +30,37 @@
         // echo $id;
     }
     ?>
-    <div class="row bg-success ">
-        <a class="text-danger p-4" href="">your post</a>
+    <div class="row">
+        <div class="col-3 row bg-success ">
+            <a class="text-danger p-4" href="edit_post">your post</a>
+            
+        </div>
+        <div class="col-3 row bg-success ">
+        <?php if(isset($_SESSION['log'])){
+                if($_SESSION['log']['user_is'] == '1'){ ?>
+                        <a class="text-danger p-4" href="dashboard"> Dashboard</a> 
+                <?php }else{?>
+                    <a class="text-danger p-4" href="login"> Login</a> 
+                <?php } ?>
+          
+            <?php  }  ?>  
+        
+            
+        
+        </div>
+        <div class="col-3 row bg-success ">
+        <a class="text-danger p-4" href="login"> Login</a> 
+
+        </div>
+        
+        <div class="col-3 row bg-success ">
+        <a class="text-danger p-4" href="post"> Add Post</a> 
+
+        </div>
+        <!-- <div class="col-4">
+        <a class="text-danger p-4" href="">Trending</a>
+
+        </div> -->
     </div>
     <div class="container">
         <h3 class="text-center"> Blogs ... </h3>
